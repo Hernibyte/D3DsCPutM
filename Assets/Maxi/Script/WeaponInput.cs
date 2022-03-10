@@ -6,11 +6,11 @@ public class WeaponInput : MonoBehaviour
 {
     public KeyCode shootInput;
     public KeyCode reloadInput;
-    public KeyCode changeWeaponInput;
+    public KeyCode changeToBeforeWeapon;
     public UnityEvent OnShoot;
     public UnityEvent OnStopShoot;
     public UnityEvent OnReload;
-    public UnityEvent OnchangeWeapon;
+    public UnityEvent OnChangeToBeforeWeapon;
     void Update()
     {
         PlayerInput();
@@ -30,9 +30,9 @@ public class WeaponInput : MonoBehaviour
         {
             OnReload.Invoke();
         }
-        else if (Input.GetKeyDown(changeWeaponInput))
+        else if (Input.GetKeyDown(changeToBeforeWeapon))
         {
-            OnchangeWeapon.Invoke();
+            OnChangeToBeforeWeapon.Invoke();
         }
     }
 }
