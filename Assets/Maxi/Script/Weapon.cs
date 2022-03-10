@@ -16,11 +16,14 @@ public class Weapon : MonoBehaviour
     {
 
     }
+    public void StopShooting()
+    {
+
+    }
     public void Reload()
     {
 
     }
-    
     public void ChangeToBeforeWeapon()
     {
 
