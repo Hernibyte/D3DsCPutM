@@ -316,7 +316,7 @@ MonoBehaviour:
   actualBullets: 30
   maxBullets: 30
   reloadBullets: 120
-  timeReload: 1
+  timeReload: 3.1
   timeToChangeWeapon: 3
   recoil: {x: 2, y: 1}
   standardScattering: 0

@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour
     public int maxBullets;
     public int reloadBullets;
     public float timeReload;
+    float reloadCount;
     public float timeToChangeWeapon;
     public Vector2 recoil;
     public float standardScattering;
@@ -26,25 +27,29 @@ public class Weapon : MonoBehaviour
     public GameObject a;
     void OnEnable()
     {
-        firerateCount = 0;    
+        firerateCount = 0; 
+        if(timeReload == 0f)
+        {
+            timeReload = 0.01f;
+            Debug.LogWarning("timeReload value 0, bad idea.. changed to 0.01f");
+        }
     }
     void Update()
     {
-        if (firerateCount > 0)
-        {
-            firerateCount -= Time.deltaTime;
-            return;
-        }
-
+        if (firerateCount > 0) {  firerateCount -= Time.deltaTime; return; }
+        
         if (actualBullets <= 0) myState = State.empty;
-        if (myState != State.shooting)
-            return;
+
+        if (myState == State.reloading) { Reloading(); return; }
+
+        if (myState != State.shooting) return;
 
         Shooting();
 
     }
     public void Shoot()
     {
+        if(myState == State.nothing)
         myState = State.shooting;
     }
     void Shooting()
@@ -57,16 +62,33 @@ public class Weapon : MonoBehaviour
     }
     public void StopShooting()
     {
+        if(myState == State.shooting)
         myState = State.nothing;
     }
     public void Reload()
     {
         myState = State.reloading;
-
+        reloadCount = timeReload;
+    }
+    void Reloading()
+    {
+        
+        if (reloadCount > 0)
+        {
+            reloadCount -= Time.deltaTime;
+        }
+        if (reloadCount < timeReload / 2 && actualBullets != maxBullets)
+        {
+            actualBullets = maxBullets;
+        }
+        else if (reloadCount < 0 && actualBullets == maxBullets)
+        {
+            myState = State.nothing;
+        }
     }
     public void ChangeToPreviousWeapon()
     {
-
+        if(myState == State.nothing)
         myState = State.changingWeapon;
     }
 }

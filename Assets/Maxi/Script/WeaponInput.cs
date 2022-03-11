@@ -11,7 +11,6 @@ public class WeaponInput : MonoBehaviour
     public UnityEvent OnStopShooting;
     public UnityEvent OnReload;
     public UnityEvent OnChangeToPreviousWeapon;
-    bool shooting;
     private void Start()
     {
         
@@ -22,22 +21,21 @@ public class WeaponInput : MonoBehaviour
     }
     void PlayerInput()
     {
-
-        if (Input.GetKeyDown(shootInput))
+        if (Input.GetKeyDown(changeToPreviousWeapon))
+        {
+            OnChangeToPreviousWeapon.Invoke();
+        }
+        if (Input.GetKeyDown(reloadInput))
+        {
+            OnReload.Invoke();
+        }
+        else if (Input.GetKey(shootInput))
         {
             OnShoot.Invoke();
         }
         else if (Input.GetKeyUp(shootInput))
         {
             OnStopShooting.Invoke();
-        }
-        else if (Input.GetKeyDown(reloadInput))
-        {
-            OnReload.Invoke();
-        }
-        else if (Input.GetKeyDown(changeToPreviousWeapon))
-        {
-            OnChangeToPreviousWeapon.Invoke();
         }
     }
 }
