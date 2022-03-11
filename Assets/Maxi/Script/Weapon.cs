@@ -6,6 +6,7 @@ public class Weapon : MonoBehaviour
 {
     public int damage;
     public float firerate;
+    float firerateCount;
     public int actualBullets;
     public int maxBullets;
     public int reloadBullets;
@@ -15,7 +16,6 @@ public class Weapon : MonoBehaviour
     public float standardScattering;
     public float actualScattering;
     const float distance = 500f;
-    bool firerateClear;
     enum State
     {
         nothing, shooting, reloading, changingWeapon, empty
@@ -24,12 +24,14 @@ public class Weapon : MonoBehaviour
 
 
     public GameObject a;
-    private void Start()
+    void OnEnable()
     {
-        firerateClear = true;
+        firerateCount = 0;    
     }
     void Update()
     {
+        if(firerateCount > 0) firerateCount -= Time.deltaTime;
+
         if (myState != State.shooting)
             return;
 
@@ -42,19 +44,10 @@ public class Weapon : MonoBehaviour
     }
     void Shooting()
     {
-        if (firerateClear)
-        {
             RaycastHit aux;
             Physics.Raycast(transform.position, Vector3.forward, out aux, distance);
             Instantiate(a, aux.point, Quaternion.identity, null);
-            StartCoroutine(WaitForFirerate());
-        }
-    }
-    IEnumerator WaitForFirerate()
-    {
-        firerateClear = false;
-        yield return new WaitForSecondsRealtime(firerate);
-        firerateClear = true;
+            firerateCount = firerate;
     }
     public void StopShooting()
     {
