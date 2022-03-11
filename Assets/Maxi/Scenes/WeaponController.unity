@@ -313,11 +313,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 40
   firerate: 0.1
+  actualBullets: 30
+  maxBullets: 30
+  reloadBullets: 120
   timeReload: 1
   timeToChangeWeapon: 3
   recoil: {x: 2, y: 1}
   standardScattering: 0
   actualScattering: 0
+  a: {fileID: 5872925081072374326, guid: f18f732c531ff3042acf9255b0714841, type: 3}
 --- !u!114 &980990598
 MonoBehaviour:
   m_ObjectHideFlags: 0

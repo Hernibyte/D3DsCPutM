@@ -11,6 +11,11 @@ public class WeaponInput : MonoBehaviour
     public UnityEvent OnStopShooting;
     public UnityEvent OnReload;
     public UnityEvent OnChangeToPreviousWeapon;
+    bool shooting;
+    private void Start()
+    {
+        
+    }
     void Update()
     {
         PlayerInput();
