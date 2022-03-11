@@ -57,6 +57,9 @@ public class Weapon : MonoBehaviour
         RaycastHit aux;
         Physics.Raycast(transform.position, transform.forward, out aux, distance);
         Instantiate(a, aux.point, Quaternion.identity, null);
+
+        transform.eulerAngles -= new Vector3(Random.Range(recoil.x - 1, recoil.x), Random.Range(recoil.y - 1, recoil.y), 0);
+
         firerateCount = firerate;
         actualBullets -= 1;
     }
@@ -64,6 +67,7 @@ public class Weapon : MonoBehaviour
     {
         if(myState == State.shooting)
         myState = State.nothing;
+        transform.localRotation = Quaternion.identity;
     }
     public void Reload()
     {
@@ -72,7 +76,6 @@ public class Weapon : MonoBehaviour
     }
     void Reloading()
     {
-        
         if (reloadCount > 0)
         {
             reloadCount -= Time.deltaTime;
