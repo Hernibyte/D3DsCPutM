@@ -30,8 +30,13 @@ public class Weapon : MonoBehaviour
     }
     void Update()
     {
-        if(firerateCount > 0) firerateCount -= Time.deltaTime;
+        if (firerateCount > 0)
+        {
+            firerateCount -= Time.deltaTime;
+            return;
+        }
 
+        if (actualBullets <= 0) myState = State.empty;
         if (myState != State.shooting)
             return;
 
@@ -44,10 +49,11 @@ public class Weapon : MonoBehaviour
     }
     void Shooting()
     {
-            RaycastHit aux;
-            Physics.Raycast(transform.position, Vector3.forward, out aux, distance);
-            Instantiate(a, aux.point, Quaternion.identity, null);
-            firerateCount = firerate;
+        RaycastHit aux;
+        Physics.Raycast(transform.position, Vector3.forward, out aux, distance);
+        Instantiate(a, aux.point, Quaternion.identity, null);
+        firerateCount = firerate;
+        actualBullets -= 1;
     }
     public void StopShooting()
     {

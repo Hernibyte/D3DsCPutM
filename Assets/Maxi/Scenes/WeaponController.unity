@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 40
-  firerate: 0.1
+  firerate: 0.15
   actualBullets: 30
   maxBullets: 30
   reloadBullets: 120
