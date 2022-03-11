@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public int damage;
-    public float timeBulletInChamber;
+    public float firerate;
     public float timeReload;
     public float timeToChangeWeapon;
     public Vector2 recoil;
@@ -24,7 +24,7 @@ public class Weapon : MonoBehaviour
     {
 
     }
-    public void ChangeToBeforeWeapon()
+    public void ChangeToPreviousWeapon()
     {
 
     }
