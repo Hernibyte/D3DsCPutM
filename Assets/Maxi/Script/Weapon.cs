@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
     public float standardScattering;
     public float actualScattering;
     const float distance = 500f;
-
+    bool firerateClear;
     enum State
     {
         nothing, shooting, reloading, changingWeapon, empty
@@ -24,7 +24,10 @@ public class Weapon : MonoBehaviour
 
 
     public GameObject a;
-
+    private void Start()
+    {
+        firerateClear = true;
+    }
     void Update()
     {
         if (myState != State.shooting)
@@ -39,9 +42,19 @@ public class Weapon : MonoBehaviour
     }
     void Shooting()
     {
-        RaycastHit aux;
-        Physics.Raycast(transform.position, Vector3.forward, out aux, distance);
-        Instantiate(a, aux.point, Quaternion.identity, null);
+        if (firerateClear)
+        {
+            RaycastHit aux;
+            Physics.Raycast(transform.position, Vector3.forward, out aux, distance);
+            Instantiate(a, aux.point, Quaternion.identity, null);
+            StartCoroutine(WaitForFirerate());
+        }
+    }
+    IEnumerator WaitForFirerate()
+    {
+        firerateClear = false;
+        yield return new WaitForSecondsRealtime(firerate);
+        firerateClear = true;
     }
     public void StopShooting()
     {
