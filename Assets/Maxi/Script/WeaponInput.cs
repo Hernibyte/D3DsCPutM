@@ -7,10 +7,10 @@ public class WeaponInput : MonoBehaviour
     public KeyCode shootInput;
     public KeyCode reloadInput;
     public KeyCode changeToPreviousWeapon;
-    public UnityEvent OnShoot;
-    public UnityEvent OnStopShooting;
-    public UnityEvent OnReload;
-    public UnityEvent OnChangeToPreviousWeapon;
+    public UnityEvent OnShoot = new UnityEvent();
+    public UnityEvent OnStopShooting = new UnityEvent();
+    public UnityEvent OnReload = new UnityEvent();
+    public UnityEvent OnChangeToPreviousWeapon = new UnityEvent();
     private void Start()
     {
         
