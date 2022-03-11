@@ -55,7 +55,7 @@ public class Weapon : MonoBehaviour
     void Shooting()
     {
         RaycastHit aux;
-        Physics.Raycast(transform.position, Vector3.forward, out aux, distance);
+        Physics.Raycast(transform.position, transform.forward, out aux, distance);
         Instantiate(a, aux.point, Quaternion.identity, null);
         firerateCount = firerate;
         actualBullets -= 1;
